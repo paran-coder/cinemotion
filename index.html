@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101316">
+  <meta name="description" content="장르별 영화 카메라 연출 38가지 — Seedance 2.5 프롬프트 복사 및 오프라인 움직임 프리뷰">
+  <!-- Sharing: the root-relative image path will be changed to absolute HTTPS when the production URL is known. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CINE / MOTION">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="CINE / MOTION — 카메라 워킹 아틀라스">
+  <meta property="og:description" content="38가지 카메라 움직임을 보고, 장르별 Seedance 2.5 영어 프롬프트를 복사하세요. 애니메이션 프리뷰와 필터를 제공합니다.">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="CINE / MOTION 카메라 움직임을 눈으로 보고, 바로 쓰세요 — Seedance 2.5 프롬프트 아틀라스">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CINE / MOTION — 카메라 워킹 아틀라스">
+  <meta name="twitter:description" content="38가지 영화 카메라 연출과 Seedance 2.5 영어 프롬프트, 움직임 프리뷰">
+  <meta name="twitter:image" content="/og-image.png">
+  <!-- Web Analytics for a plain static HTML site. Vercel Analytics must be enabled in project settings. -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <title>CINE / MOTION — 장르별 카메라 워킹 아틀라스</title>
+  <style>
+
+    :root {
+      color-scheme: dark;
+      --bg: #101316;
+      --surface: #191d20;
+      --raised: #22272a;
+      --inset: #121619;
+      --line: rgba(236,239,238,.105);
+      --ink: #f1f0e9;
+      --secondary: #b6b9b6;
+      --muted: #8f9695;
+      --accent: #efbd83;
+      --accent-ink: #211a12;
+      --radius: 12px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 400; -webkit-font-smoothing: antialiased; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; }
+    button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .page { min-height: 100vh; background: var(--bg); }
+    .shell { width: min(1440px, calc(100% - 80px)); margin-inline: auto; }
+    .topbar { min-height: 68px; display: flex; justify-content: space-between; align-items: center; gap: 24px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 600; letter-spacing: -.01em; font-size: 15px; text-decoration: none; white-space: nowrap; }
+    .brandmark { width: 32px; height: 32px; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); border-radius: 8px; flex: none; }
+    .brandmark svg { width: 19px; height: 19px; display: block; stroke-width: 1.8; }
+    .brand em { font-style: normal; color: var(--muted); }
+    .header-subtitle { margin-left: auto; color: var(--muted); font-size: 12px; }
+    .top-meta { display: flex; align-items: center; gap: 20px; white-space: nowrap; font-family: var(--mono); font-size: 11px; color: var(--secondary); }
+    .live-dot { width: 6px; height: 6px; display: inline-block; background: #80b2a0; border-radius: 50%; vertical-align: middle; margin-right: 7px; }
+    .hero { display: grid; grid-template-columns: minmax(0, .98fr) minmax(0, 1.02fr); gap: 72px; align-items: center; padding: 96px 0 88px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 0; }
+    .eyebrow::before { content: ""; display: block; width: 24px; height: 1px; background: currentColor; }
+    .hero h1 { font-size: clamp(40px, 4.45vw, 64px); font-weight: 500; line-height: 1.3; letter-spacing: -.045em; word-break: keep-all; margin: 24px 0; }
+    .hero h1 span { color: var(--accent); }
+    .hero-copy { max-width: 520px; margin: 0; color: var(--secondary); font-size: 15px; line-height: 1.9; word-break: keep-all; }
+    .hero-copy strong { font-weight: 500; color: var(--ink); }
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 0; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); }
+    .stat { display: flex; flex-direction: column; gap: 8px; padding-right: 28px; margin-right: 28px; border-right: 1px solid var(--line); }
+    .stat:last-child { margin-right: 0; padding-right: 0; border-right: 0; }
+    .stat b { font-family: var(--mono); font-size: 26px; font-weight: 500; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+    .stat small { font-size: 11px; color: var(--muted); font-weight: 400; }
+    .hero-right { min-width: 0; padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+    .hero-right::before { display: none; }
+    .hero-film-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 0 14px; color: var(--secondary); font-size: 11px; font-family: var(--mono); }
+    .recording { display: inline-flex; align-items: center; gap: 8px; color: var(--secondary); }
+    .rec-dot { width: 6px; height: 6px; border-radius: 50%; background: #cf8c75; }
+    .hero-shot { position: relative; width: 100%; height: 300px; background: #0c1a21; border: 1px solid rgba(246,248,247,.12); border-radius: 8px; overflow: hidden; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .hero-shot::after, .preview::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,8,9,.10) 0%, transparent 35%, transparent 65%, rgba(5,8,9,.55) 100%); pointer-events: none; }
+    .hero-shot-caption { position: absolute; z-index: 2; left: 20px; right: 20px; bottom: 18px; display: flex; align-items: end; justify-content: space-between; gap: 12px; }
+    .hero-shot-caption span { display: block; margin-bottom: 6px; color: #d9e0dc; font: 400 11px var(--mono); }
+    .hero-shot-caption strong { font-size: 20px; font-weight: 500; color: #fff; }
+    .crosshair { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid rgba(247,247,239,.65); border-radius: 4px; color: #e8eee9; font: 400 20px var(--mono); }
+    .hero-film-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding-top: 14px; color: var(--muted); font-size: 11px; }
+    .hero-film-bottom code { color: var(--ink); font-family: var(--mono); }
+    .hero-film-bottom .dotline { display: flex; gap: 5px; }
+    .hero-film-bottom .dotline i { width: 16px; height: 2px; background: #42494b; display: block; }
+    .hero-film-bottom .dotline i:nth-child(3) { background: var(--accent); }
+    .section { border-top: 1px solid var(--line); padding: 48px 0 96px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 32px; }
+    .section-kicker { font-size: 12px; color: var(--accent); font-weight: 500; margin: 0 0 12px; }
+    .section-head h2 { margin: 0; font-size: clamp(23px,2.1vw,30px); font-weight: 500; line-height: 1.35; letter-spacing: -.025em; word-break: keep-all; }
+    .section-head p { margin: 12px 0 0; max-width: 760px; font-size: 13px; color: var(--secondary); line-height: 1.75; word-break: keep-all; }
+    .mode-toggle { display: flex; gap: 4px; padding: 4px; flex: none; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); }
+    .mode-toggle button { border: 0; border-radius: 6px; background: transparent; color: var(--muted); padding: 10px 14px; white-space: nowrap; font-size: 12px; font-weight: 500; transition: background-color .16s, color .16s; }
+    .mode-toggle button.active { color: var(--ink); background: var(--raised); }
+    .mode-toggle button:hover:not(.active) { color: var(--ink); }
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 16px 0 20px; border-top: 1px solid var(--line); }
+    .tabs { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+    .genre-tab { display: flex; align-items: center; gap: 8px; white-space: nowrap; border: 1px solid transparent; border-radius: 7px; padding: 10px 12px; min-height: 40px; color: var(--secondary); background: transparent; font-size: 12px; font-weight: 500; transition: background-color .16s, color .16s; }
+    .genre-tab:hover { color: var(--ink); background: var(--raised); }
+    .genre-tab[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent); }
+    .genre-tab .count { font: 400 10px var(--mono); opacity: .7; font-variant-numeric: tabular-nums; }
+    .search-wrap { display: flex; align-items: center; gap: 10px; width: 248px; min-width: 200px; height: 40px; padding: 0 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; color: var(--muted); }
+    .search-wrap:focus-within { border-color: rgba(239,189,131,.65); }
+    .search-wrap svg { width: 16px; height: 16px; flex: none; }
+    .search-wrap input { width: 100%; min-width: 0; height: 100%; border: 0; outline: none; background: transparent; color: var(--ink); font-size: 12px; }
+    .search-wrap input::placeholder { color: var(--muted); }
+    .sub-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+    .result-text { font-size: 12px; color: var(--muted); }
+    .result-text strong { font: 500 12px var(--mono); color: var(--ink); font-variant-numeric: tabular-nums; }
+    .animation-btn { display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 8px; border: 0; border-radius: 6px; background: transparent; color: var(--secondary); font-size: 12px; }
+    .animation-btn:hover { background: var(--raised); color: var(--ink); }
+    .animation-btn svg { width: 13px; height: 13px; }
+    .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; align-items: stretch; }
+    .move-card { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); transition: border-color .18s; }
+    .move-card:hover { border-color: rgba(239,189,131,.34); }
+    .card-header { min-height: 118px; padding: 20px 20px 18px; }
+    .card-index { font: 400 11px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+    .card-heading { display: flex; justify-content: space-between; align-items: start; gap: 12px; margin-top: 12px; }
+    .card-heading h3 { margin: 0; font-size: 19px; line-height: 1.35; font-weight: 500; letter-spacing: -.02em; overflow-wrap: anywhere; }
+    .card-heading h3 small { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; font-weight: 400; letter-spacing: 0; }
+    .type-chip { flex: none; max-width: 125px; white-space: normal; color: var(--secondary); font: 400 10px/1.4 var(--mono); text-align: right; }
+    .preview { position: relative; height: 208px; overflow: hidden; background: #0b2026; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .preview::before { content: ""; position: absolute; z-index: 2; left: 16px; top: 16px; width: 17px; height: 17px; border-top: 1px solid rgba(245,245,234,.7); border-left: 1px solid rgba(245,245,234,.7); pointer-events: none; }
+    .preview-overlay { position: absolute; z-index: 2; top: 14px; left: 42px; right: 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px; pointer-events: none; }
+    .preview-overlay span { font: 400 10px var(--mono); color: rgba(255,255,255,.88); }
+    .preview-overlay .preview-time { padding: 4px 6px; background: rgba(6,11,14,.52); color: #e8eee9; border-radius: 3px; }
+    .preview-play { position: absolute; z-index: 4; top: 50%; left: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.46); border-radius: 8px; background: rgba(11,18,23,.74); color: #fff; font-size: 16px; opacity: 0; transition: opacity .16s, background-color .16s; }
+    .preview:hover .preview-play, .preview-play:focus-visible, .preview[data-paused="true"] .preview-play { opacity: 1; }
+    .preview-play:hover { background: #202b2f; }
+    .preview-foot { position: absolute; z-index: 2; left: 16px; right: 16px; bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #fff; pointer-events: none; }
+    .motion-label { font: 400 11px var(--mono); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .motion-bar { flex: none; width: 72px; height: 2px; overflow: hidden; background: rgba(255,255,255,.35); }
+    .motion-bar i { display: block; width: 0; height: 100%; background: var(--accent); }
+    .card-body { display: flex; flex: 1; flex-direction: column; padding: 20px; }
+    .purpose { margin: 0 0 16px; min-height: 44px; font-size: 13px; line-height: 1.75; color: var(--secondary); word-break: keep-all; }
+    .genre-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .genre-tags span { font-size: 11px; color: var(--muted); padding: 5px 8px; border: 1px solid var(--line); border-radius: 4px; }
+    .prompt-box { margin-top: auto; position: relative; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--inset); }
+    .prompt-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .prompt-label { color: var(--secondary); font-size: 11px; font-weight: 500; }
+    .lang-badge { color: var(--muted); font: 400 10px var(--mono); }
+    .prompt-text { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; min-height: 68px; max-height: 82px; overflow: hidden; overflow-wrap: anywhere; font: 400 11px/1.65 var(--mono); color: #d1d4d0; }
+    .prompt-box::after { content: ""; pointer-events: none; position: absolute; left: 16px; right: 16px; bottom: 16px; height: 12px; background: linear-gradient(transparent, var(--inset)); }
+    .copy-btn { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 12px; width: 100%; min-height: 40px; border: 1px solid rgba(239,189,131,.65); border-radius: 8px; background: transparent; color: var(--accent); font-size: 12px; font-weight: 500; transition: background-color .16s; }
+    .copy-btn:hover { background: rgba(239,189,131,.10); }
+    .copy-btn svg { width: 15px; height: 15px; }
+    .copy-btn.copied { color: #9cddba; border-color: rgba(156,221,186,.5); background: rgba(156,221,186,.06); }
+    .tip { display: flex; gap: 12px; align-items: start; margin: 16px 0 0; color: var(--muted); font-size: 11px; line-height: 1.65; word-break: keep-all; }
+    .tip::before { content: "팁"; flex: none; color: var(--accent); font-size: 11px; font-weight: 500; }
+    .empty { grid-column: 1/-1; padding: 88px 24px; text-align: center; border: 1px dashed var(--line); border-radius: 12px; color: var(--secondary); }
+    .empty b { display: block; margin-bottom: 8px; color: var(--ink); font-size: 20px; font-weight: 500; }
+    .note-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; padding: 32px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+    .note-panel h3 { font-size: 15px; font-weight: 500; margin: 0 0 12px; }
+    .note-panel p { font-size: 12px; color: var(--secondary); line-height: 1.9; word-break: keep-all; margin: 0; }
+    .note-panel strong { color: var(--ink); font-weight: 500; }
+    .formula { margin-top: 16px; padding: 12px 16px; background: var(--inset); border: 1px solid var(--line); border-radius: 6px; color: var(--accent); font: 400 11px/1.9 var(--mono); overflow-wrap: anywhere; }
+    .footer { display: flex; justify-content: space-between; gap: 36px; padding: 32px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; line-height: 1.9; }
+    .footer a { color: var(--secondary); text-underline-offset: 3px; }
+    .footer a:hover { color: var(--ink); }
+    .source-links { max-width: 560px; display: flex; gap: 8px 16px; align-items: start; flex-wrap: wrap; }
+    .source-links > span { width: 100%; color: var(--muted); }
+    .toast { position: fixed; z-index: 30; left: 50%; bottom: 24px; transform: translate(-50%,16px); opacity: 0; pointer-events: none; max-width: calc(100vw - 32px); padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; background: #ebe7de; color: #171c1c; box-shadow: 0 12px 32px rgba(0,0,0,.22); font-size: 12px; font-weight: 500; transition: transform .18s, opacity .18s; }
+    .toast.visible { opacity: 1; transform: translate(-50%,0); }
+    @media (max-width: 1240px) {
+      .shell { width: min(1160px,calc(100% - 56px)); }
+      .hero { gap: 40px; }
+      .card-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .toolbar { align-items: start; flex-direction: column; gap: 12px; }
+      .search-wrap { width: min(360px, 100%); }
+    }
+    @media (max-width: 840px) {
+      .hero { grid-template-columns: 1fr; padding: 64px 0 64px; gap: 40px; }
+      .hero-right { max-width: 680px; width: 100%; }
+      .header-subtitle { display: none; }
+      .section-head { align-items: start; flex-direction: column; }
+      .note-panel { grid-template-columns: 1fr; gap: 28px; }
+    }
+    @media (max-width: 640px) {
+      .shell { width: calc(100% - 32px); }
+      .topbar { min-height: 60px; }
+      .brand { font-size: 13px; gap: 8px; }
+      .brandmark { width: 30px; height: 30px; }
+      .top-meta { font-size: 10px; gap: 8px; }
+      .top-meta .offline { display: none; }
+      .hero { padding: 56px 0 56px; gap: 32px; }
+      .hero h1 { font-size: clamp(32px, 8.1vw, 44px); margin: 20px 0; }
+      .hero-copy { font-size: 13px; }
+      .hero-stats { margin-top: 28px; padding-top: 20px; }
+      .stat { padding-right: 16px; margin-right: 16px; }
+      .stat b { font-size: 22px; }
+      .stat small { font-size: 10px; }
+      .hero-right { padding: 12px; }
+      .hero-film-head { font-size: 10px; }
+      .hero-shot { height: 232px; }
+      .hero-film-bottom { font-size: 10px; }
+      .hero-film-bottom .dotline { display: none; }
+      .section { padding: 32px 0 64px; }
+      .section-head { gap: 20px; margin-bottom: 24px; }
+      .section-head h2 { font-size: 24px; }
+      .mode-toggle { width: 100%; }
+      .mode-toggle button { flex: 1; padding: 10px 8px; }
+      .toolbar { gap: 12px; padding: 12px 0 16px; }
+      .tabs { width: 100%; max-width: calc(100vw - 32px); flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; scrollbar-width: thin; }
+      .genre-tab { flex: none; }
+      .search-wrap { width: 100%; }
+      .card-grid { grid-template-columns: 1fr; gap: 16px; }
+      .card-header { min-height: 110px; }
+      .preview { height: 212px; }
+      .note-panel { padding: 24px; gap: 24px; }
+      .footer { flex-direction: column; gap: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header class="shell topbar">
+    <a class="brand" href="#top" aria-label="Cine Motion 홈으로">
+      <span class="brandmark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3l3 6h7M4 8h7l-3 7M7 20l4-7 6 7M16 8l-8 4"/></svg></span>
+      <span>CINE <em>/</em> MOTION</span>
+    </a>
+    <div class="header-subtitle">Camera movement library</div>
+    <div class="top-meta"><span class="offline"><span class="live-dot"></span>오프라인 사용 가능</span><span>Seedance 2.5</span></div>
+  </header>
+
+  <main id="top" class="shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <div class="eyebrow">카메라 연출 참고서 · Seedance 2.5</div>
+        <h1 id="page-title">카메라의 움직임을<br><span>눈으로 보고, 바로 쓰세요.</span></h1>
+        <p class="hero-copy">영화 촬영 문법부터 AI 액션 연출까지 <strong>38가지 카메라 기법</strong>을 7개 장르로 정리했습니다. 움직임을 미리 보고, <strong>Seedance 2.5용 영어 프롬프트</strong>를 복사해 바로 사용하세요.</p>
+        <div class="hero-stats">
+          <div class="stat"><b id="stat-moves">38</b><small>카메라 연출</small></div>
+          <div class="stat"><b>07</b><small>영화 장르</small></div>
+          <div class="stat"><b>02</b><small>프롬프트 유형</small></div>
+        </div>
+      </div>
+      <div class="hero-right" aria-label="카메라 무빙 예시 애니메이션">
+        <div class="hero-film-head"><span>Preview 01 / Dolly In</span><span class="recording"><i class="rec-dot"></i> Camera simulation</span></div>
+        <div class="hero-shot">
+          <canvas id="hero-canvas" aria-label="카메라가 피사체를 향해 전진하는 돌리 인 시뮬레이션" role="img"></canvas>
+          <div class="hero-shot-caption"><div><span>전진 이동 / Dolly In</span><strong>Dolly In</strong></div><div class="crosshair" aria-hidden="true">+</div></div>
+        </div>
+        <div class="hero-film-bottom"><span>CAMERA PATH <code>FORWARD</code></span><div class="dotline" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span>5초 반복</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="atlas" aria-labelledby="atlas-title">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">01 / 연출 라이브러리</div>
+          <h2 id="atlas-title">장르별 카메라 워킹과 특수 연출</h2>
+          <p>장르를 고르고 움직임을 비교해 보세요. 특수 연출은 이동·배우 동작·시간 효과를 결합한 기법입니다. 아래 프리뷰는 실제 AI 생성 결과가 아닌 움직임 시뮬레이션입니다.</p>
+        </div>
+        <div class="mode-toggle" role="group" aria-label="복사 프롬프트 유형 선택">
+          <button type="button" data-mode="full" class="active" aria-pressed="true">장면 포함 프롬프트</button>
+          <button type="button" data-mode="motion" aria-pressed="false">카메라 동작만</button>
+        </div>
+      </div>
+      <div class="toolbar">
+        <nav class="tabs" id="genre-tabs" aria-label="장르 필터"></nav>
+        <label class="search-wrap" aria-label="기법 검색">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="7.3"/><path d="m16.5 16.5 5 5"/></svg>
+          <input type="search" id="search" placeholder="기법명 / 연출 의도 검색" autocomplete="off" spellcheck="false" />
+        </label>
+      </div>
+      <div class="sub-toolbar"><div id="result-text" class="result-text" role="status" aria-live="polite"></div><button class="animation-btn" id="global-play" type="button" aria-pressed="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg><span>모든 프리뷰 일시정지</span></button></div>
+      <div class="card-grid" id="card-grid"></div>
+      <aside class="note-panel" aria-labelledby="note-title">
+        <div>
+          <h3 id="note-title">프롬프트 작성 원칙</h3>
+          <p><strong>한 샷에는 중심 카메라 움직임 하나</strong>를 지정하고, 충격·속도·배우 동작은 명확한 시간 순서로 덧붙이세요. 속도와 방향, 피사체와의 관계, 무엇이 드러나는지를 함께 적으세요. <strong>돌리</strong>는 카메라가 실제로 이동하고 <strong>줌</strong>은 화각이 바뀝니다. 두 움직임은 결과가 다릅니다.</p>
+        </div>
+        <div>
+          <h3>추천 프롬프트 구조</h3>
+          <p>‘장면 포함’은 텍스트→비디오에, ‘카메라 동작만’은 참고 이미지를 사용하는 이미지→비디오에 우선 활용하세요. Seedance 2.5에서도 낯선 연출 이름만 적기보다 화면에 실제로 보일 움직임을 풀어 설명하세요. 참고 영상·이미지를 추가할 때 텍스트 명령과 충돌하지 않게 지정하세요.</p>
+          <div class="formula">[Shot] + [Camera path & speed] + [Action trigger] +<br>[Time cues] + [End frame] + [Continuity]</div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="shell footer">
+    <div>© 2026 CINE / MOTION · Camera Movement Atlas v1.2.0 · Seedance 2.5 edition<br>기초 촬영 문법과 AI 영상용 복합 액션 연출을 구분해 장르별로 추천합니다. 특정 모델의 프롬프트 준수율이나 생성 성공률을 보증하지 않습니다.</div>
+    <div class="source-links"><span>촬영 용어 및 프롬프트 참고 자료</span><a href="https://seed.bytedance.com/en/seedance2_5" target="_blank" rel="noopener noreferrer">Seedance 2.5 ↗</a><a href="https://www.studiobinder.com/camera-shots/camera-movements/" target="_blank" rel="noopener noreferrer">StudioBinder ↗</a><a href="https://runway.com/resources/ai-camera-prompts" target="_blank" rel="noopener noreferrer">Runway Guide ↗</a><a href="https://help.runwayml.com/hc/en-us/articles/46749315925395-Camera-Terms-Prompts-Examples" target="_blank" rel="noopener noreferrer">Camera Terms ↗</a></div>
+  </footer>
+  <div class="shell" style="padding-bottom:24px;color:var(--muted);font-size:11px;line-height:1.7">UI refinement based on <a href="https://heydamir.design/unslop" target="_blank" rel="noopener noreferrer" style="color:var(--secondary)">Unslop</a> by Damir Sokolovsky (@heydamir), licensed under CC BY 4.0.</div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite">✓ 프롬프트가 복사되었습니다.</div>
+<script>
+(() => {
+  'use strict';
+  const genres = [
+    {id:'all',name:'전체 보기',accent:'#f7bc98'},
+    {id:'action',name:'액션',accent:'#f6a47c'},
+    {id:'romance',name:'로맨스',accent:'#efabc8'},
+    {id:'horror',name:'공포 · 스릴러',accent:'#b9a1fa'},
+    {id:'drama',name:'드라마',accent:'#c4b6f0'},
+    {id:'scifi',name:'SF · 판타지',accent:'#87cce1'},
+    {id:'comedy',name:'코미디',accent:'#f4d191'},
+    {id:'travel',name:'다큐 · 여행',accent:'#91dcc5'}
+  ];
+  // Each example teaches a single dominant camera movement. Genres are creative recommendations, not measured popularity rankings.
+  const moves = [
+    {id:'dolly-in',en:'Dolly In / Push-In',ko:'돌리 인 · 푸시 인',type:'PHYSICAL MOVE',motion:'dollyIn',tags:['romance','drama','horror'],desc:'인물에게 서서히 접근해 감정과 긴장을 집중시킵니다.',tip:'배경 원근이 변화해야 합니다. 단순 확대(줌)와 구분하세요.',camera:'Medium close-up, slow physical dolly push-in toward the subject over 5 seconds, with visible background parallax and a steady frame.',prompt:'Medium close-up of a woman realizing a painful truth in a quiet café at dusk. The camera slowly dollies forward toward her face over 5 seconds, with subtle background parallax. Soft window light emphasizes her changing expression.'},
+    {id:'dolly-out',en:'Dolly Out / Pull-Back',ko:'돌리 아웃 · 풀백',type:'PHYSICAL MOVE',motion:'dollyOut',tags:['romance','drama','scifi'],desc:'인물에게서 멀어지며 고립감이나 주변 상황을 드러냅니다.',tip:'카메라가 후퇴하면서 공간이 더 넓게 드러나야 합니다.',camera:'Medium shot, smooth dolly backward over 5 seconds, physically retreating from the subject to reveal more of the surrounding environment.',prompt:'A lone astronaut stands in a vast abandoned hangar. The camera smoothly dollies backward for 5 seconds, revealing the enormous empty space around the astronaut and emphasizing isolation. Cold blue atmospheric light.'},
+    {id:'follow-track',en:'Follow Tracking Shot',ko:'전진 트래킹 · 팔로우',type:'TRACKING',motion:'tracking',tags:['action','drama','travel'],desc:'움직이는 인물을 같은 속도로 따라가며 현장감을 만듭니다.',tip:'피사체와 카메라가 같은 방향·속도로 이동한다고 명시하세요.',camera:'Medium-wide following shot, camera tracks forward behind the moving subject at matching walking speed for 5 seconds, keeping a consistent distance.',prompt:'Medium-wide shot following a courier sprinting through a crowded night market. The camera tracks forward behind the runner, matching their speed while keeping a consistent distance for 5 seconds. Neon signs slide past in the background.'},
+    {id:'truck',en:'Truck / Lateral Tracking',ko:'좌우 트럭 · 횡이동',type:'TRACKING',motion:'truck',tags:['action','drama','comedy'],desc:'카메라가 옆으로 이동해 속도감과 공간의 깊이를 보여줍니다.',tip:'카메라 전체가 옆으로 이동합니다. 제자리 회전인 팬과 다릅니다.',camera:'Medium-wide shot, camera trucks smoothly from left to right in a straight lateral path over 5 seconds, with strong foreground-background parallax.',prompt:'A martial artist walks past a row of pillars in an underground station. The camera trucks smoothly from left to right parallel to the subject over 5 seconds. Foreground pillars slide past faster than the distant background.'},
+    {id:'whip-pan',en:'Whip Pan',ko:'휘프 팬 · 급속 수평 회전',type:'FAST ROTATION',motion:'whip',tags:['action','comedy','horror'],desc:'순간적인 시선 전환으로 충격, 타격, 빠른 연결을 만듭니다.',tip:'중간의 강한 모션 블러와 명확한 최종 피사체를 지정하세요.',camera:'Eye-level shot, extremely fast whip pan from left to right in under 1 second, with strong horizontal motion blur, landing sharply on the new subject.',prompt:'Two detectives hear a sudden crash in a dim office. The camera makes an extremely fast whip pan from left to right in under 1 second, streaking the room with horizontal motion blur and landing sharply on the broken window.'},
+    {id:'handheld',en:'Handheld Chase',ko:'핸드헬드 추격',type:'CAMERA STYLE',motion:'handheld',tags:['action','horror','drama'],desc:'작고 불규칙한 흔들림으로 위기 상황에 몰입시킵니다.',tip:'의도된 손떨림의 정도를 지정하세요. 과하면 피사체가 무너집니다.',camera:'Close following shot, handheld camera moves forward with controlled irregular steps and subtle natural shake for 5 seconds, staying close to the subject.',prompt:'A frightened journalist rushes down a narrow stairwell during a blackout. A handheld camera follows closely from behind for 5 seconds with controlled, irregular footstep shake. Emergency red light flickers against concrete walls.'},
+    {id:'orbit',en:'360° Orbit',ko:'360도 오빗',type:'CIRCULAR MOVE',motion:'orbit',tags:['action','scifi','romance'],desc:'피사체를 중심으로 회전하며 주인공의 존재감을 강조합니다.',tip:'인물을 화면 중심에 유지하고 배경이 회전한다고 표현하세요.',camera:'Medium-full shot, smooth 360-degree orbit around the stationary subject over 5 seconds, maintaining constant radius and keeping the subject centered.',prompt:'A futuristic armored hero stands still on a glowing rooftop. The camera performs a smooth 360-degree orbit around the hero over 5 seconds, keeping the hero centered while the neon skyline rotates behind them.'},
+    {id:'arc',en:'Arc Shot',ko:'아크 샷 · 반원 이동',type:'CURVED MOVE',motion:'arc',tags:['romance','drama','scifi'],desc:'짧은 곡선 이동으로 친밀감이나 감정의 변화를 표현합니다.',tip:'풀 오빗보다 약한 30~90도 곡선으로 지정하면 안정적입니다.',camera:'Medium two-shot, slow 60-degree camera arc around the subjects over 5 seconds, maintaining a constant distance and smooth framing.',prompt:'Two lovers meet under a cherry blossom tree at sunset. The camera makes a slow 60-degree arc around them over 5 seconds, preserving their connection while golden light and falling petals shift in the background.'},
+    {id:'crash-zoom',en:'Crash Zoom',ko:'크래시 줌 · 급속 확대',type:'OPTICAL ZOOM',motion:'crashZoom',tags:['action','comedy','horror'],desc:'0.5초 내외의 급격한 렌즈 줌으로 발견·위협·반전을 강조합니다.',tip:'카메라 위치를 고정한 채 초점거리를 급히 바꿉니다. 빠른 돌리인과 혼동하지 마세요.',camera:'Locked camera, wide shot. At 2 seconds perform a sudden optical crash zoom into the subject in 0.5 seconds, rapidly narrowing the field of view without moving the camera body. Hold a sharp close-up.',prompt:'An original sci-fi hero spots an incoming energy projectile across an empty industrial courtyard. Start on a wide locked-off shot. At 2 seconds, execute a sudden optical crash zoom to the hero’s focused eyes in 0.5 seconds; the camera remains in place, only the focal length changes. Hold the close-up for one second, with no cut.'},
+    {id:'fpv',en:'FPV Flythrough',ko:'FPV 플라이스루',type:'FLYING MOVE',motion:'fpv',tags:['action','scifi','travel'],desc:'장애물 사이를 빠르게 통과하는 1인칭 비행 시점입니다.',tip:'진행 경로를 한 방향으로 단순하게 정하면 왜곡을 줄입니다.',camera:'Fast FPV camera flying forward along a continuous path for 5 seconds, weaving gently between obstacles with controlled banking and strong depth parallax.',prompt:'Fast FPV view flying forward through the arches of a futuristic canyon city for 5 seconds. The camera weaves gently between structures with controlled banking, revealing a vast glowing plaza ahead.'},
+    {id:'pan',en:'Pan Left / Right',ko:'팬 · 수평 회전',type:'FIXED AXIS',motion:'pan',tags:['romance','drama','travel'],desc:'카메라 위치는 고정한 채 좌우로 회전하며 풍경을 소개합니다.',tip:'회전 방향과 마지막에 보여줄 대상을 꼭 지정하세요.',camera:'Wide shot from a fixed tripod position, slow horizontal pan from left to right over 5 seconds to reveal the destination, without physically moving the camera.',prompt:'Wide landscape shot from a fixed tripod on a coastal lookout. The camera slowly pans from left to right over 5 seconds, revealing a lighthouse beyond the cliffs in warm morning mist.'},
+    {id:'tilt',en:'Tilt Up / Down',ko:'틸트 · 수직 회전',type:'FIXED AXIS',motion:'tilt',tags:['scifi','travel','horror'],desc:'제자리에서 위아래로 회전해 높이와 압도적 규모를 드러냅니다.',tip:'화면이 올라가는 틸트 업과 카메라가 올라가는 크레인을 구분하세요.',camera:'Low-angle shot, camera tilts slowly upward from a fixed pivot point over 5 seconds, beginning near the ground and ending on the towering subject.',prompt:'Low-angle shot at the base of an immense ancient stone tower. From a fixed position, the camera tilts slowly upward over 5 seconds, revealing carved details and finally the summit disappearing into cloud.'},
+    {id:'crane-up',en:'Crane Up / Rise',ko:'크레인 업 · 상승',type:'VERTICAL MOVE',motion:'craneUp',tags:['scifi','drama','travel'],desc:'카메라 자체가 위로 올라가면서 장면 전체의 규모를 드러냅니다.',tip:'상승하며 시점이 높아지고 아래 풍경이 새로 보이게 합니다.',camera:'Wide shot, smooth crane rise upward and slightly backward over 5 seconds, with the camera tilting down subtly to keep the subject in frame.',prompt:'A traveler stands alone in an immense desert temple courtyard. The camera rises smoothly on a crane and drifts slightly backward over 5 seconds, gradually revealing the symmetrical architecture surrounding the traveler.'},
+    {id:'crane-down',en:'Crane Down / Descend',ko:'크레인 다운 · 하강',type:'VERTICAL MOVE',motion:'craneDown',tags:['romance','drama','scifi'],desc:'높은 전경에서 인물의 높이로 내려와 서사를 개인에게 모읍니다.',tip:'높은 시점에서 낮은 시점으로 변하는 물리적 이동을 명시하세요.',camera:'High wide shot, smooth crane descent from an elevated position to eye level over 5 seconds, gradually focusing attention on a single subject.',prompt:'At an elegant outdoor wedding, the camera begins high above the garden and smoothly cranes down to eye level over 5 seconds, settling on the couple exchanging quiet smiles among the guests.'},
+    {id:'drone',en:'Aerial Drone Reveal',ko:'드론 에어리얼 · 항공 리빌',type:'AERIAL MOVE',motion:'drone',tags:['scifi','travel','action'],desc:'하늘로 이동하며 지형과 세계관을 대규모로 소개합니다.',tip:'드론 상승 방향과 최종적으로 드러날 지형을 함께 지정하세요.',camera:'Very wide aerial shot, drone camera ascends and drifts forward smoothly over 5 seconds, revealing an expansive landscape and its scale.',prompt:'A lone train crosses a dramatic green valley at sunrise. A drone camera ascends and drifts forward smoothly for 5 seconds, revealing winding rivers, mountain ridges and the immense landscape surrounding the train.'},
+    {id:'steadicam',en:'Steadicam Follow',ko:'스테디캠 · 안정적 팔로우',type:'STABILIZED MOVE',motion:'steadicam',tags:['romance','drama','travel'],desc:'인물을 부드럽게 따라가며 자연스럽고 긴 호흡의 동선을 만듭니다.',tip:'핸드헬드와 달리 진동 없이 부드럽게 떠가는 느낌을 지정하세요.',camera:'Medium follow shot, stabilized Steadicam glides forward behind the walking subject for 5 seconds at matching pace, maintaining smooth and level framing.',prompt:'A young woman walks through a sunlit art gallery, reflecting on a conversation. A stabilized Steadicam glides smoothly behind her at her walking pace for 5 seconds, holding a steady medium shot as paintings pass on both sides.'},
+    {id:'dolly-zoom',en:'Dolly Zoom / Vertigo',ko:'돌리 줌 · 버티고 효과',type:'COMBINED MOVE',motion:'dollyZoom',tags:['horror','scifi','drama'],desc:'피사체 크기는 유지하면서 배경 원근을 급변시켜 불안을 만듭니다.',tip:'전진과 줌 아웃을 동시에 실행해 피사체 크기를 고정해야 합니다.',camera:'Medium shot, classic dolly zoom over 5 seconds: the camera physically dollies toward the subject while the lens zooms out to keep the subject the same size, visibly stretching background perspective.',prompt:'A detective suddenly recognizes a familiar face in a crowded station. Perform a classic 5-second dolly zoom: the camera dollies toward the detective while the lens zooms out to keep their face the same size. The station background distorts dramatically.'},
+    {id:'pov',en:'POV Movement',ko:'POV · 주관적 시점',type:'SUBJECTIVE MOVE',motion:'pov',tags:['horror','action','travel'],desc:'등장인물이 직접 보는 시야처럼 이동해 관객을 몰입시킵니다.',tip:'시점의 주체와 보는 방향을 명확히 쓰면 일관성이 높아집니다.',camera:'First-person POV shot, camera moves forward at walking pace for 5 seconds with subtle head-level sway, looking directly ahead through the environment.',prompt:'First-person POV walking through a dark museum corridor, the camera moving forward at a cautious pace for 5 seconds with subtle natural head sway. A faint flickering light appears at the far end of the hallway.'},
+    {id:'dutch-roll',en:'Dutch Roll',ko:'더치 롤 · 수평축 회전',type:'CAMERA ROLL',motion:'dutch',tags:['horror','scifi','comedy'],desc:'화면 수평선이 기울며 혼란, 불안, 기묘한 감각을 전달합니다.',tip:'카메라가 전진하는 동작이 아니라 렌즈 축을 중심으로 회전합니다.',camera:'Medium shot, camera slowly rolls clockwise from a level horizon to a 15-degree Dutch angle over 5 seconds, with a fixed camera position.',prompt:'A student notices gravity behaving strangely inside an empty classroom. The camera slowly rolls clockwise from level to a 15-degree Dutch angle over 5 seconds while remaining in the same position. The tilted horizon creates unease.'},
+    {id:'pedestal',en:'Pedestal Up / Down',ko:'페데스털 · 수직 평행 이동',type:'VERTICAL MOVE',motion:'pedestal',tags:['drama','comedy','travel'],desc:'고개를 기울이지 않고 카메라 전체 높이를 위아래로 옮깁니다.',tip:'틸트와 달리 카메라 방향이 유지된 채 높이만 달라집니다.',camera:'Medium shot, camera pedestal moves straight upward over 5 seconds while keeping the lens direction level and unchanged.',prompt:'A chef prepares a delicate dessert at a kitchen counter. The camera makes a smooth straight upward pedestal move over 5 seconds while remaining level, revealing the plated dessert and the surrounding kitchen from a progressively higher position.'},
+    {id:'snorricam',en:'SnorriCam / Body Mount',ko:'스노리캠 · 신체 부착 카메라',type:'BODY MOUNT',motion:'snorri',tags:['horror','drama','comedy'],desc:'인물은 화면에 고정되고 주변 환경만 불안정하게 흘러갑니다.',tip:'인물 얼굴의 화면상 크기와 위치를 유지한다고 명시하세요.',camera:'Body-mounted SnorriCam shot for 5 seconds, camera fixed directly to the subject facing their face. The subject stays perfectly centered and nearly fixed in size while the background moves behind them.',prompt:'A nervous office worker hurries through a packed subway station. Use a body-mounted SnorriCam for 5 seconds: their face stays centered and nearly unchanged in size while commuters and station lights rush chaotically behind them.'},
+    {id:'one-take',en:'One-Take Walkthrough',ko:'원테이크 워크스루',type:'CONTINUOUS MOVE',motion:'onetake',tags:['action','drama','travel'],desc:'컷 없이 공간을 통과하며 인물과 배경의 연결을 유지합니다.',tip:'한 장면·한 경로만 지정하고 여러 무빙 명령을 쌓지 마세요.',camera:'Continuous single-take shot, camera glides forward smoothly through a corridor for 5 seconds without cuts, passing through doorways along one clear path.',prompt:'A single continuous shot moves smoothly through an old theater corridor and enters the warmly lit stage through an open doorway. The camera glides forward along one clear path for 5 seconds without cuts, revealing musicians preparing to perform.'},
+    {id:'optical-zoom',en:'Optical Zoom In',ko:'옵티컬 줌 인',type:'OPTICAL ZOOM',motion:'zoom',tags:['comedy','horror','drama'],desc:'카메라는 그대로 두고 화각을 좁혀 시선을 특정 대상에 집중합니다.',tip:'원근은 유지하고 프레임만 확대됩니다. 돌리 인과 다릅니다.',camera:'Static camera position, slow optical zoom from a wide shot to a medium close-up over 5 seconds. Only the lens focal length changes; the camera does not travel.',prompt:'A character in a crowded party realizes nobody has noticed their ridiculous costume. The camera stays in the exact same position and slowly optically zooms from a wide shot to a medium close-up over 5 seconds for a dry comic reaction.'},
+    {id:'whip-tilt',en:'Whip Tilt',ko:'휘프 틸트 · 급속 수직 회전',type:'FAST ROTATION',motion:'whipTilt',tags:['action','comedy','scifi'],desc:'상하 방향의 빠른 시점 이동으로 예상치 못한 발견을 강조합니다.',tip:'팬은 좌우, 틸트는 상하 회전입니다. 둘을 구별해 쓰세요.',camera:'Low-angle shot, sudden rapid whip tilt upward on a fixed camera pivot in under 1 second, with vertical motion blur, stopping on a surprising subject above.',prompt:'A street performer points toward the sky. The camera makes a sudden rapid whip tilt upward in under 1 second with vertical motion blur, stopping on a gigantic floating airship above the plaza.'},
+    {id:'reverse-track',en:'Reverse Tracking',ko:'리버스 트래킹 · 후진 팔로우',type:'TRACKING',motion:'reverseTrack',tags:['romance','drama','action'],desc:'뒤로 이동하며 다가오는 인물의 얼굴과 움직임을 계속 담습니다.',tip:'카메라가 뒤로 이동하면서 인물과의 거리는 일정하게 유지하세요.',camera:'Front-facing medium shot, camera tracks backward smoothly at the same pace as the subject walking toward it for 5 seconds, keeping a consistent distance.',prompt:'Two friends walk toward the camera along a rain-soaked city street during a heartfelt conversation. The camera tracks backward smoothly at their walking pace for 5 seconds, preserving a consistent front-facing medium two-shot.'},
+    {id:'locked',en:'Locked-Off / Static Shot',ko:'락드 오프 · 고정 샷',type:'STATIC REFERENCE',motion:'static',tags:['drama','horror','comedy'],desc:'움직임을 완전히 멈춰 인물의 연기나 프레임 속 변화를 강조합니다.',tip:'카메라가 움직이지 않는 기본 샷으로, 움직임 기법과 비교하는 기준입니다.',camera:'Wide shot, locked-off tripod camera held completely steady for 5 seconds, fixed framing and fixed lens, while the subject moves naturally within the composition.',prompt:'In a symmetrical hotel lobby, a guest stands motionless as an elevator slowly opens behind them. Use a locked-off wide shot for 5 seconds with a completely steady tripod camera. Only the characters and elevator doors move within the frame.'},
+    {id:'push-through',en:'Push-Through Reveal',ko:'푸시 스루 · 전경 통과',type:'REVEAL MOVE',motion:'pushThrough',tags:['action','horror','scifi'],desc:'문이나 구조물 사이를 통과해 숨겨진 피사체를 드러냅니다.',tip:'통과할 전경과 마지막에 드러나는 대상 하나를 지정하세요.',camera:'Wide shot, camera slowly dollies forward through the open gap between foreground pillars over 5 seconds, revealing the subject beyond with strong near-field parallax.',prompt:'The camera slowly dollies forward through the narrow gap between two massive stone pillars over 5 seconds, revealing a luminous ancient portal hidden in a dark temple chamber. Strong foreground parallax emphasizes the reveal.'},
+    {id:'top-down',en:'Top-Down Descent',ko:'탑다운 디센트 · 수직 하강',type:'OVERHEAD MOVE',motion:'topDown',tags:['travel','scifi','comedy'],desc:'머리 위 수직 시점에서 아래로 내려가며 패턴을 강조합니다.',tip:'탑다운은 시점 각도이며, 하강을 결합해야 무빙이 됩니다.',camera:'Directly overhead top-down shot, camera descends vertically toward the center of the composition over 5 seconds, maintaining a straight-down viewing angle.',prompt:'Perfectly overhead view of a colorful outdoor food market arranged in geometric rows. The camera descends vertically over 5 seconds while looking straight down, revealing intricate patterns of stalls and moving pedestrians.'},
+    {id:'slide-reveal',en:'Lateral Slide Reveal',ko:'슬라이드 리빌 · 측면 발견',type:'REVEAL MOVE',motion:'slideReveal',tags:['comedy','romance','horror'],desc:'전경의 장애물을 옆으로 지나며 예상 밖의 장면을 공개합니다.',tip:'전경이 지나가면서 피사체가 새로 나타나는 구도를 설계하세요.',camera:'Medium-wide shot, camera slides smoothly sideways from left to right over 5 seconds, passing a foreground doorway to reveal a hidden subject beyond.',prompt:'A camera slides gently from left to right past a doorway over 5 seconds, unexpectedly revealing a nervous groom practicing his wedding vows to a houseplant in the next room. Comedic timing, warm domestic lighting.'},
+
+    {id:'hero-landing',en:'Hero Landing',ko:'히어로 랜딩 · 착지 리빌',type:'ACTION CHOREOGRAPHY',motion:'heroLanding',tags:['action','scifi'],desc:'도약·착지·로우앵글 리빌을 결합해 압도적인 등장감을 만듭니다.',tip:'착지 순간의 속도 변화와 먼지 반응, 마지막 로우앵글 구도를 순서대로 쓰세요.',camera:'Single 8-second shot. Begin with a medium-wide shot from slightly above. Follow the descending subject, dip the camera toward the ground on impact at 3 seconds, add one brief controlled impact vibration, then settle into a low-angle medium shot that tilts up to reveal the standing hero. No cuts.',prompt:'Single continuous 8-second cinematic shot of an original armored superhero descending into an empty plaza. The camera follows the descent from a medium-wide view. At 3 seconds, the hero lands in a three-point pose; dust expands outward and the camera dips with one brief impact vibration. The camera stabilizes at ground level and tilts up as the hero stands, finishing on a powerful low-angle medium shot. No cuts, consistent armor and face.'},
+    {id:'speed-ramp',en:'Speed Ramp',ko:'스피드 램프 · 가감속 연출',type:'TEMPORAL EFFECT',motion:'speedRamp',tags:['action','scifi','comedy'],desc:'동작 속도를 빠름→슬로모션→빠름으로 바꿔 결정적 순간을 강조합니다.',tip:'카메라 이동 자체와 별개인 시간 연출입니다. 타임코드별 속도 변화를 쓰세요.',camera:'Single tracking shot, 8 seconds. From 0–2 seconds follow the moving subject at normal speed; from 2–4 seconds ramp the action into pronounced slow motion while the camera keeps tracking smoothly; at 4 seconds accelerate rapidly back to real time. Keep spatial continuity, no cuts.',prompt:'Single continuous 8-second action shot of an original masked athlete sprinting across a futuristic rooftop. A side-tracking camera matches the runner. At 2 seconds, smoothly ramp into dramatic slow motion as the athlete leaps across a narrow gap; dust and fabric move slowly while the camera continues its path. At 4 seconds, accelerate sharply back to real-time speed as the athlete lands and runs on. Preserve the same roof geometry and character, no cuts.'},
+    {id:'impact-shake',en:'Impact Shake',ko:'임팩트 셰이크 · 타격 진동',type:'CAMERA REACTION',motion:'impactShake',tags:['action','horror','scifi'],desc:'충돌이 일어난 단 한 순간에만 카메라가 짧게 흔들려 충격을 전달합니다.',tip:'지속적인 핸드헬드가 아니라 충돌 직후 0.2~0.4초 진동임을 지정하세요.',camera:'Fixed medium shot for 6 seconds. At the exact impact at 3 seconds, produce one brief controlled horizontal-and-vertical camera shake lasting 0.3 seconds, then immediately return to perfectly stable framing. The shake is a reaction to contact, not constant handheld motion.',prompt:'A giant mechanical training door slams shut in a deserted science-fiction hangar. Hold a stable medium-wide shot. Exactly when the metal door hits the floor at 3 seconds, add a sharp, controlled 0.3-second camera impact shake with tiny horizontal and vertical recoil. Dust vibrates at the base of the door, then the camera becomes perfectly steady again. One continuous 6-second shot, no cuts.'},
+    {id:'blast-pushback',en:'Blast Pushback',ko:'블래스트 푸시백 · 충격파 후퇴',type:'CAMERA REACTION',motion:'blastPushback',tags:['action','scifi','horror'],desc:'폭발의 압력이 카메라를 뒤로 밀어내는 듯한 물리적 반응을 만듭니다.',tip:'단순 줌아웃이 아니라 충격파 이후 카메라 전체가 후퇴하는 경로를 지정하세요.',camera:'Single wide shot, 7 seconds. At 3 seconds a visible shockwave expands toward the lens; the physical camera rapidly dollies backward about 3 meters with a short recoil and then stabilizes, widening the view through parallax rather than optical zoom. No cuts.',prompt:'An original sci-fi character releases a harmless luminous shockwave in an empty futuristic courtyard. Begin with a stable medium-wide shot. At 3 seconds the expanding ring of light reaches the camera; the camera is physically pushed backward several meters, briefly recoils, and stabilizes in a much wider view. Ground dust rushes outward while the character remains in the same position. Real background parallax, not an optical zoom. One continuous 7-second shot.'},
+    {id:'weapon-cam',en:'Weapon Cam',ko:'웨폰캠 · 무기 부착 시점',type:'RIG / FIRST-PERSON',motion:'weaponCam',tags:['action','scifi'],desc:'소품 무기에 가상 카메라를 부착해 휘두름과 회전의 역동성을 전달합니다.',tip:'카메라가 무엇에 고정되어 있는지 명확하게 적으세요. 독립적인 드론 시점이 아닙니다.',camera:'Single 6-second prop-mounted POV shot. The virtual camera is rigidly mounted to the hilt of a fantasy training sword, following the prop’s translation and rotation closely. One controlled sweeping motion from right to left; environment rotates and streaks, then the camera settles. No cuts.',prompt:'A choreographed fantasy training sequence with a harmless glowing practice sword. Use a single 6-second weapon-mounted POV: the virtual camera is rigidly attached near the sword hilt, moving and rotating exactly with the prop. At 2 seconds the sword makes one broad right-to-left practice swing; the empty training hall sweeps through the background with natural motion blur. The blade never strikes a person. The camera settles as the sword stops. No cuts.'},
+    {id:'through-shot',en:'Through Shot / Thread the Gap',ko:'관통샷 · 틈새 통과',type:'CONTINUOUS PATH',motion:'throughShot',tags:['action','scifi','horror'],desc:'카메라가 열린 문·아치·물체 사이의 좁은 틈을 끊김 없이 통과합니다.',tip:'고체를 비현실적으로 뚫는 대신 통과 가능한 빈 공간과 진입·출구를 지정하면 안정적입니다.',camera:'Single unbroken 7-second FPV push-through. Begin outside an open doorway, move forward through the center of the visible empty gap, pass close to the doorframe with strong foreground parallax, and emerge into a bright room. Maintain a physically continuous path and correct geometry; no cut or teleport.',prompt:'Single continuous 7-second cinematic push-through shot in a futuristic building. The camera starts in a dim hallway, glides forward through the clearly open gap between two sliding metal doors, narrowly passes the foreground frame, and emerges into a vast luminous atrium. Strong near-object parallax, continuous spatial geometry, no camera teleportation, no impossible clipping through solid walls, no cuts.'},
+    {id:'drone-dive',en:'Drone Dive / FPV Plunge',ko:'드론 다이브 · 급강하',type:'AERIAL PATH',motion:'droneDive',tags:['action','travel','scifi'],desc:'공중 전경에서 지면의 특정 목표를 향해 급강하하며 속도감을 만듭니다.',tip:'높이, 하강 경로, 최종 목표, 급강하 후 감속 시점을 모두 지정하세요.',camera:'Single 8-second FPV drone-style shot. Start in a high aerial view, tilt the lens down, dive rapidly along a clear curved descent toward the center of an empty road, then smoothly level out at street height by 6 seconds. Keep a continuous flight path, no cuts.',prompt:'Single continuous 8-second FPV drone dive over a sprawling futuristic coastal city at golden hour. Start with a high aerial wide shot, tilt steeply downward and dive rapidly between the clear open spaces of two towers. By 6 seconds, level out smoothly just above an empty coastal road, revealing the sea ahead. Strong depth parallax, controlled banking, realistic continuous flight path, no cuts or teleports.'},
+    {id:'relay-onetake',en:'Relay One-Take',ko:'릴레이 원테이크 · 피사체 인계',type:'STAGED LONG TAKE',motion:'relayOneTake',tags:['action','drama','comedy'],desc:'하나의 롱테이크에서 첫 인물의 움직임을 따라가다가 두 번째 인물로 자연스럽게 초점을 넘깁니다.',tip:'연결 지점과 인계 대상, 카메라의 진입·이탈 방향을 시간 순서로 쓰세요.',camera:'Single continuous 10-second tracking shot. Follow subject A from behind for 0–4 seconds; at 4 seconds subject A passes in front of subject B as they cross paths; smoothly shift framing and tracking direction to follow subject B for 4–10 seconds. Keep one unbroken physical camera path, no edits.',prompt:'A single unbroken 10-second relay tracking shot in a busy backstage corridor. From 0–4 seconds the camera follows a stagehand carrying a rolled poster. At 4 seconds the stagehand passes the poster to a performer approaching from the side. Without cutting, the camera curves naturally around the handoff and follows the performer through the doorway until 10 seconds. Preserve the same poster, character appearances and corridor layout. No hidden cut or teleport.'},
+    {id:'hero-circle',en:'360° Hero Circle',ko:'360 히어로 서클 · 로우앵글 오빗',type:'STYLIZED ORBIT',motion:'heroCircle',tags:['action','scifi','drama'],desc:'낮은 시점에서 주인공을 중심으로 360도 회전하며 위압감과 클라이맥스를 연출합니다.',tip:'기존 360도 오빗의 연출 변형입니다. 카메라 높이와 인물 동작, 회전 속도를 추가하세요.',camera:'Single continuous low-angle 360-degree orbit over 8 seconds. Keep the original hero centered at a constant distance while the camera circles clockwise at knee height, slightly tilted upward. The background rotates through a full turn; the hero remains sharp and consistent. No cuts.',prompt:'An original futuristic hero stands in the middle of a rain-soaked neon rooftop after a dramatic victory. One continuous 8-second low-angle hero circle: the camera stays at knee height, tilted slightly upward, and completes a controlled clockwise 360-degree orbit around the stationary hero at a constant radius. The city skyline moves behind the hero while their face and armor stay consistent. Finish on the original front angle, no cuts.'}
+  ];
+
+  const genreById = Object.fromEntries(genres.map(g => [g.id,g]));
+  const els = {tabs:document.getElementById('genre-tabs'),grid:document.getElementById('card-grid'),search:document.getElementById('search'),result:document.getElementById('result-text'),global:document.getElementById('global-play'),toast:document.getElementById('toast')};
+  const state = {genre:'all',query:'',mode:'full',paused:window.matchMedia('(prefers-reduced-motion: reduce)').matches};
+  let visibleCanvas = new Set(), sceneObserver=null, toastTimeout=null;
+  const iconCopy='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
+  const iconPause='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>';
+  const iconPlay='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m7 4 13 8-13 8z"/></svg>';
+  const safe = s => String(s).replace(/[&<>"']/g,ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  function getVisible(){const q=state.query.trim().toLocaleLowerCase();return moves.filter(m => (state.genre==='all'||m.tags.includes(state.genre))&&(!q||[m.en,m.ko,m.desc,m.tip,m.type,...m.tags.map(id=>genreById[id].name)].join(' ').toLocaleLowerCase().includes(q)));}
+  function renderTabs(){els.tabs.innerHTML=genres.map(g=>`<button type="button" class="genre-tab" data-genre="${g.id}" aria-pressed="${state.genre===g.id}">${safe(g.name)} <span class="count">${g.id==='all'?moves.length:moves.filter(m=>m.tags.includes(g.id)).length}</span></button>`).join('');}
+  function renderCards(){
+    if(sceneObserver){sceneObserver.disconnect();sceneObserver=null;}
+    visibleCanvas.clear();
+    const items=getVisible();
+    els.result.innerHTML=`<strong>${items.length}</strong>개의 카메라 연출을 표시 중 <span>/ 총 ${moves.length}개</span>`;
+    els.grid.innerHTML=items.length?items.map((m)=>{
+      const i=moves.indexOf(m)+1, acc=genreById[m.tags[0]].accent, text=state.mode==='motion'?m.camera:m.prompt;
+      return `<article class="move-card" style="--card-accent:${acc}" data-card-id="${m.id}">
+        <div class="card-header"><div class="card-index">기법 ${String(i).padStart(2,'0')} / ${moves.length}</div>
+          <div class="card-heading"><h3>${safe(m.en)}<small>${safe(m.ko)}</small></h3><span class="type-chip">${safe(m.type.toLowerCase())}</span></div></div>
+        <div class="preview" data-paused="${state.paused}" data-preview-id="${m.id}"><canvas data-canvas-id="${m.id}" role="img" aria-label="${safe(m.ko)} 카메라 무빙 시뮬레이션"></canvas>
+          <div class="preview-overlay"><span>카메라 시뮬레이션</span><span class="preview-time">5s</span></div>
+          <button class="preview-play" type="button" data-toggle="${m.id}" aria-label="${safe(m.ko)} 프리뷰 ${state.paused?'재생':'일시정지'}">${state.paused?'▶':'Ⅱ'}</button>
+          <div class="preview-foot"><span class="motion-label">${safe(m.en)}</span><span class="motion-bar" aria-hidden="true"><i data-progress="${m.id}"></i></span></div>
+        </div>
+        <div class="card-body"><p class="purpose">${safe(m.desc)}</p><div class="genre-tags">${m.tags.map(id=>`<span>${safe(genreById[id].name)}</span>`).join('')}</div>
+          <div class="prompt-box"><div class="prompt-header"><span class="prompt-label">${state.mode==='full'?'장면 포함 · 영어 프롬프트':'카메라 동작 · 영어 프롬프트'}</span><span class="lang-badge">EN</span></div><div class="prompt-text" title="${safe(text)}">${safe(text)}</div></div>
+          <button class="copy-btn" type="button" data-copy="${m.id}">${iconCopy} 프롬프트 복사</button>
+          <p class="tip">${safe(m.tip)}</p>
+        </div></article>`;
+    }).join(''):`<div class="empty"><b>검색 결과가 없습니다.</b>다른 장르를 선택하거나 검색어를 짧게 입력해 보세요.</div>`;
+    document.querySelectorAll('[data-mode]').forEach(b=>{const on=b.dataset.mode===state.mode;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on));});
+    initializeCanvases();
+  }
+  function renderGlobal(){els.global.innerHTML=(state.paused?iconPlay:iconPause)+`<span>모든 프리뷰 ${state.paused?'재생':'일시정지'}</span>`;els.global.setAttribute('aria-pressed',String(!state.paused));}
+  function showToast(msg){els.toast.textContent=msg;els.toast.classList.add('visible');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>els.toast.classList.remove('visible'),2200);}
+  async function copyText(text){
+    if(navigator.clipboard && window.isSecureContext){try{await navigator.clipboard.writeText(text);return true;}catch(e){/* fallback */}}
+    const field=document.createElement('textarea');field.value=text;field.setAttribute('readonly','');field.style.cssText='position:fixed;top:0;left:-9999px;opacity:0';document.body.append(field);field.focus();field.select();
+    let ok=false;try{ok=document.execCommand('copy');}catch(e){ok=false;}field.remove();return ok;
+  }
+  els.tabs.addEventListener('click',e=>{const btn=e.target.closest('[data-genre]');if(!btn)return;state.genre=btn.dataset.genre;renderTabs();renderCards();});
+  els.search.addEventListener('input',e=>{state.query=e.target.value;renderCards();});
+  document.querySelector('.mode-toggle').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(!b)return;state.mode=b.dataset.mode;renderCards();});
+  els.global.addEventListener('click',()=>{state.paused=!state.paused;renderGlobal();els.grid.querySelectorAll('.preview').forEach(p=>{p.dataset.paused=String(state.paused);p.querySelector('button').textContent=state.paused?'▶':'Ⅱ';});});
+  els.grid.addEventListener('click',async e=>{
+    const c=e.target.closest('[data-copy]');
+    if(c){const m=moves.find(x=>x.id===c.dataset.copy);if(!m)return;const ok=await copyText(state.mode==='motion'?m.camera:m.prompt);if(ok){c.classList.add('copied');c.innerHTML='✓ 복사 완료';showToast('프롬프트를 클립보드에 복사했습니다.');setTimeout(()=>{if(c.isConnected){c.classList.remove('copied');c.innerHTML=iconCopy+' 프롬프트 복사';}},1800);}else{showToast('클립보드 접근이 제한되어 복사하지 못했습니다. 브라우저 권한을 확인하세요.');}return;}
+    const b=e.target.closest('[data-toggle]');if(b){const preview=b.closest('.preview');const newPaused=preview.dataset.paused!=='true';preview.dataset.paused=String(newPaused);b.textContent=newPaused?'▶':'Ⅱ';b.setAttribute('aria-label',`${b.dataset.toggle} 프리뷰 ${newPaused?'재생':'일시정지'}`);}
+  });
+
+  // A self-contained real-time perspective illustration: no stock footage or network requests.
+  const palettes={action:['#0b1e2f','#25394f','#e8a27d','#80b3cb'],romance:['#251829','#3b3346','#eeb5c8','#c7a2d5'],horror:['#121728','#29223f','#b9a3ff','#87a7d8'],drama:['#171c2d','#2e314a','#c9a9e7','#a6b3d2'],scifi:['#0a2532','#214556','#82dbe4','#86a7e3'],comedy:['#32261e','#4a3940','#fad59c','#dab3a4'],travel:['#0d2c33','#265452','#b4e2b6','#8fc7bf']};
+  const clipDuration=5200;
+  let rafStart=performance.now();
+  function smooth(t){return t*t*(3-2*t)}
+  function clamp(n,a,b){return Math.max(a,Math.min(b,n))}
+  function fastMove(t){return smooth(clamp((t-.36)/.19,0,1))}
+  function cameraFor(m,t){
+    const e=smooth(t), c={x:0,y:1.75,z:-9,yaw:0,pitch:0,roll:0,fov:62,subjectZ:8,subjectX:0};
+    switch(m){
+      case 'dollyIn':c.z=-11+9*e;break;
+      case 'dollyOut':c.z=-2-9*e;break;
+      case 'tracking':c.z=-12+11*e;c.subjectZ=5+11*e;break;
+      case 'truck':c.x=-5+10*e;break;
+      case 'whip':c.yaw=-.46+.92*fastMove(t);break;
+      case 'handheld':c.z=-11+6*e;c.x=.26*Math.sin(39*t)+.14*Math.sin(71*t);c.y+=.19*Math.sin(49*t);c.roll=.025*Math.sin(31*t);break;
+      case 'orbit':{const a=2*Math.PI*e;c.x=15*Math.sin(a);c.z=8-15*Math.cos(a);c.y=1.8;c.yaw=Math.atan2(-c.x,8-c.z);break;}
+      case 'arc':{const a=-.72+1.44*e;c.x=15*Math.sin(a);c.z=8-15*Math.cos(a);c.yaw=Math.atan2(-c.x,8-c.z);break;}
+      case 'crashZoom':c.fov=68-43*fastMove(t);break;
+      case 'fpv':c.z=-13+15*e;c.x=2.15*Math.sin(10*t);c.y=1.75+.4*Math.sin(11*t);c.roll=.055*Math.sin(13*t);c.yaw=-.11*Math.sin(10*t);break;
+      case 'pan':c.yaw=-.42+.84*e;break;
+      case 'tilt':c.pitch=-.31+.62*e;break;
+      case 'craneUp':c.y=1.8+10*e;c.z=-8-4*e;c.pitch=Math.atan2(1.6-c.y,8-c.z);break;
+      case 'craneDown':c.y=11.8-10*e;c.z=-12+4*e;c.pitch=Math.atan2(1.6-c.y,8-c.z);break;
+      case 'drone':c.y=5+12*e;c.z=-13+7*e;c.pitch=Math.atan2(1.3-c.y,8-c.z);c.fov=72;break;
+      case 'steadicam':c.z=-12+9*e;c.subjectZ=5+9*e;c.x=.06*Math.sin(7*t);break;
+      case 'dollyZoom':{c.z=-11+9*e;const startDist=8-(-11),currentDist=8-c.z;const baseFocal=1/Math.tan(57*Math.PI/360);const f=baseFocal*currentDist/startDist;c.fov=2*Math.atan(1/f)*180/Math.PI;break;}
+      case 'pov':c.z=-13+13*e;c.x=.20*Math.sin(t*33);c.y=1.75+.12*Math.sin(t*37);c.yaw=.03*Math.sin(15*t);break;
+      case 'dutch':c.roll=-.23+.46*e;break;
+      case 'pedestal':c.y=.35+6.3*e;break;
+      case 'snorri':c.z=-11+8*e;c.x=2*Math.sin(e*6);c.y=1.6+.25*Math.sin(14*t);break;
+      case 'onetake':c.z=-13+14*e;c.x=.3*Math.sin(3.5*t);break;
+      case 'zoom':c.fov=70-35*e;break;
+      case 'whipTilt':c.pitch=-.53+1.06*fastMove(t);break;
+      case 'reverseTrack':c.z=-3-9*e;c.subjectZ=8-9*e;break;
+      case 'static':break;
+      case 'pushThrough':c.z=-13+13*e;break;
+      case 'topDown':c.y=17-9*e;c.z=7.2;c.pitch=-Math.PI/2+.04;c.fov=68;break;
+      case 'slideReveal':c.x=-6+11*e;break;
+      case 'heroLanding':{const fall=clamp((t-.12)/.43,0,1),impact=clamp((t-.55)/.08,0,1);c.z=-10+6*smooth(fall);c.y=5.2-3.9*smooth(fall);c.pitch=.02+.17*smooth(impact);c.subjectY=t<.55?3.6*(1-smooth(fall)):-.2*Math.exp(-10*(t-.55));c.x=.07*Math.sin(t*190)*Math.exp(-32*Math.abs(t-.55));break;}
+      case 'speedRamp':{let travel=t<.25?t*.7:t<.52?.175+(t-.25)*.12:t<.78?.2074+(t-.52)*2.35:.8184+(t-.78)*.8;c.z=-13+11*travel;c.subjectZ=5+11*travel;c.x=-.4;break;}
+      case 'impactShake':{const impact=Math.exp(-90*Math.abs(t-.56));c.x=.42*impact*Math.sin(340*t);c.y+=.25*impact*Math.cos(310*t);c.roll=.048*impact*Math.sin(330*t);break;}
+      case 'blastPushback':{const retreat=smooth(clamp((t-.43)/.22,0,1)),shake=Math.exp(-52*Math.abs(t-.43));c.z=-5-8*retreat;c.x=.18*shake*Math.sin(220*t);c.roll=.035*shake*Math.sin(170*t);break;}
+      case 'weaponCam':c.z=-10+4*e;c.y=1.75+.6*Math.sin(2*Math.PI*e);c.yaw=-.60+1.2*smooth(clamp((t-.3)/.33,0,1));c.roll=-.28+.56*smooth(clamp((t-.3)/.33,0,1));break;
+      case 'throughShot':c.z=-13+16*e;c.x=.45*Math.sin(2*Math.PI*e);break;
+      case 'droneDive':{const drop=smooth(clamp(t/.74,0,1));c.y=22-19*drop;c.z=-16+20*e;c.pitch=-.66+.53*smooth(clamp((t-.65)/.22,0,1));c.roll=.04*Math.sin(7*t);break;}
+      case 'relayOneTake':{c.z=-11+12*e;c.x=t<.47?-.9+2*t:.04+4*smooth((t-.47)/.53);c.subjectX=t<.47?-.8:2.5;c.subjectZ=t<.47?7+5*t:10+4*t;c.yaw=t<.47?0:-.34*smooth((t-.47)/.53);break;}
+      case 'heroCircle':{const a=2*Math.PI*e;c.x=15*Math.sin(a);c.z=8-15*Math.cos(a);c.y=.75;c.yaw=Math.atan2(-c.x,8-c.z);c.pitch=.11;break;}
+    }
+    return c;
+  }
+  function rgba(hex,a){const n=parseInt(hex.substring(1),16);return `rgba(${n>>16},${(n>>8)&255},${n&255},${a})`}
+  function drawScene(canvas,motion,genreId,progress){
+    const box=canvas.getBoundingClientRect(),w=box.width,h=box.height;
+    if(w<10||h<10)return;
+    const dpr=Math.min(window.devicePixelRatio||1,1.5),pixelW=Math.round(w*dpr),pixelH=Math.round(h*dpr);
+    if(canvas.width!==pixelW||canvas.height!==pixelH){canvas.width=pixelW;canvas.height=pixelH;}
+    const ctx=canvas.getContext('2d');if(!ctx)return;
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+    const pal=palettes[genreId]||palettes.action;const [dark,mid,glow,soft]=pal;
+    let grad=ctx.createLinearGradient(0,0,0,h);grad.addColorStop(0,dark);grad.addColorStop(.64,mid);grad.addColorStop(1,'#0c111d');ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+    const c=cameraFor(motion,progress);
+    ctx.save();ctx.translate(w/2,h/2);ctx.rotate(c.roll);ctx.translate(-w/2,-h/2);
+    const focal=w*.5/Math.tan(c.fov*Math.PI/360);
+    function proj(x,y,z){
+      const dx=x-c.x,dy=y-c.y,dz=z-c.z,co=Math.cos(c.yaw),si=Math.sin(c.yaw);
+      const rx=co*dx-si*dz,rz=si*dx+co*dz;
+      const cp=Math.cos(c.pitch),sp=Math.sin(c.pitch);
+      const ry=cp*dy-sp*rz,rz2=sp*dy+cp*rz;
+      if(rz2<.45)return null;
+      const scale=focal/rz2;
+      return {x:w/2+rx*scale,y:h*.51-ry*scale,s:scale,z:rz2};
+    }
+    function line(points,color,width=1){const ps=points.map(p=>proj(...p));if(ps.some(p=>!p))return;ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(ps[0].x,ps[0].y);for(let i=1;i<ps.length;i++)ctx.lineTo(ps[i].x,ps[i].y);ctx.stroke();}
+    function polygon(points,fill,stroke){const ps=points.map(p=>proj(...p));if(ps.some(p=>!p))return;ctx.beginPath();ctx.moveTo(ps[0].x,ps[0].y);for(let i=1;i<ps.length;i++)ctx.lineTo(ps[i].x,ps[i].y);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=.8;ctx.stroke();}}
+    // Decorative atmosphere points / stars.
+    for(let i=0;i<27;i++){const x=((i*71+41)%431)/431*w,y=((i*47+29)%151)/220*h;ctx.fillStyle=rgba(soft,.12+(i%4)*.055);ctx.fillRect(x,y,.8+(i%3)*.5,.8+(i%3)*.5);}
+    // Road surface, world grid and vanishing lines.
+    for(let z=48;z>=-5;z-=4){line([[-28,-.12,z],[28,-.12,z]],rgba(soft,z%8===0?.21:.1),.85)}
+    for(let x=-24;x<=24;x+=3){line([[x,-.11,-5],[x,-.11,50]],rgba(soft,x===0?.22:.105),1)}
+    for(let edge of [-4.0,4.0])line([[edge,-.08,-5],[edge,-.08,55]],rgba(glow,.26),1.4);
+    // Buildings: far to near means nearby shapes correctly overlap.
+    const buildings=[];
+    for(let k=0;k<7;k++)for(const side of [-1,1]){
+      const z=3+k*7.4,x=side*(6.8+(k%3)*.7),bw=3.4+(k%2)*1.2,bh=5+((k*3)%5),depth=3.8;
+      buildings.push({x,z,bw,bh,depth,k,side});
+    }
+    buildings.sort((a,b)=>b.z-a.z);
+    buildings.forEach(b=>{
+      const x1=b.x-b.bw/2,x2=b.x+b.bw/2,z=b.z,back=z+b.depth,H=b.bh;
+      polygon([[x1,0,z],[x2,0,z],[x2,H,z],[x1,H,z]],rgba(mid,.65),rgba(soft,.24));
+      polygon([[b.side===1?x1:x2,0,z],[b.side===1?x1:x2,H,z],[b.side===1?x1:x2,H,back],[b.side===1?x1:x2,0,back]],rgba(dark,.75),rgba(glow,.11));
+      for(let row=1;row<4;row++)for(let col=1;col<3;col++){
+        const xx=x1+(b.bw/3)*col,zf=z-.025,yy=row*(H/5)+.5,ww=.20;
+        polygon([[xx-ww,yy,zf],[xx+ww,yy,zf],[xx+ww,yy+.45,zf],[xx-ww,yy+.45,zf]],rgba(row===2?glow:soft,(b.k+col+row)%4===0?.36:.15));
+      }
+      line([[x1,H,z],[x2,H,z]],rgba(glow,.35));
+    });
+    // Foreground columns make lateral and through movements legible.
+    if(['pushThrough','slideReveal','truck','onetake','throughShot','relayOneTake'].includes(motion)){
+      for(const xx of [-2.7,2.7]){
+        polygon([[xx-.26,0,-.4],[xx+.26,0,-.4],[xx+.26,6.3,-.4],[xx-.26,6.3,-.4]],rgba(mid,.91),rgba(glow,.28));
+        line([[xx-.26,4.7,-.4],[xx+.26,4.7,-.4]],rgba(glow,.45),2);
+      }
+    }
+    // A person-shaped marker on the virtual set. For SnorriCam the figure stays attached to the frame.
+    if(motion!=='snorri'){
+      let z=c.subjectZ,x=c.subjectX;
+      const sy=c.subjectY||0;const head=proj(x,2.9+sy,z),foot=proj(x,.05+sy,z),left=proj(x-.4,1.85+sy,z),right=proj(x+.4,1.85+sy,z),midTorso=proj(x,1.25+sy,z);
+      if(head&&foot&&left&&right&&midTorso){
+        const r=Math.max(1,head.s*.28);
+        const floor=proj(x,-.05,z);
+        if(floor){ctx.beginPath();ctx.ellipse(floor.x,floor.y,Math.max(3,r*2),Math.max(1,r*.45),0,0,Math.PI*2);ctx.fillStyle='rgba(0,0,0,.36)';ctx.fill();}
+        const shimmer=ctx.createRadialGradient(head.x,head.y,1,head.x,head.y,Math.max(36,r*4));shimmer.addColorStop(0,rgba(glow,.19));shimmer.addColorStop(1,rgba(glow,0));ctx.fillStyle=shimmer;ctx.fillRect(head.x-r*4,head.y-r*4,r*8,r*8);
+        ctx.strokeStyle=rgba(glow,.55);ctx.lineWidth=Math.max(2,head.s*.14);ctx.lineCap='round';
+        ctx.beginPath();ctx.moveTo(midTorso.x,midTorso.y);ctx.lineTo(foot.x-r*.7,foot.y);ctx.moveTo(midTorso.x,midTorso.y);ctx.lineTo(foot.x+r*.7,foot.y);ctx.stroke();
+        polygon([[x-.34,2.4+sy,z],[x+.34,2.4+sy,z],[x+.39,1.38+sy,z],[x-.39,1.38+sy,z]],'#18151e',rgba(glow,.8));
+        ctx.beginPath();ctx.arc(head.x,head.y,r,0,Math.PI*2);ctx.fillStyle='#19141b';ctx.fill();ctx.lineWidth=Math.max(1,head.s*.045);ctx.strokeStyle=glow;ctx.stroke();
+        line([[x-.34,2.3+sy,z],[x-.55,1.45+sy,z]],rgba(glow,.75),Math.max(1,head.s*.1));
+        line([[x+.34,2.3+sy,z],[x+.55,1.45+sy,z]],rgba(glow,.75),Math.max(1,head.s*.1));
+      }
+    }else{
+      const sh=h*.54,cy=h*.46;ctx.fillStyle=rgba(glow,.12);ctx.beginPath();ctx.ellipse(w/2,h*.77,w*.18,sh*.42,0,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#1c1720';ctx.strokeStyle=glow;ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(w/2,cy,w*.061,h*.106,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+      ctx.beginPath();ctx.moveTo(w*.45,h*.59);ctx.lineTo(w*.55,h*.59);ctx.lineTo(w*.64,h*1.03);ctx.lineTo(w*.36,h*1.03);ctx.closePath();ctx.fill();ctx.stroke();
+    }
+    // Cinematic tracking marks are fixed to screen, helping distinguish movement from stabilization.
+    ctx.strokeStyle='rgba(245,232,228,.26)';ctx.lineWidth=1;const cx=w/2,cy=h*.51,fw=25,fh=21;
+    for(const sx of [-1,1])for(const sy of [-1,1]){
+      ctx.beginPath();ctx.moveTo(cx+sx*(fw+8),cy+sy*fh);ctx.lineTo(cx+sx*fw,cy+sy*fh);ctx.lineTo(cx+sx*fw,cy+sy*(fh-8));ctx.stroke();
+    }
+    if(motion==='whip'||motion==='whipTilt'){
+      const intensity=Math.sin(Math.PI*fastMove(progress));
+      if(intensity>.1){ctx.fillStyle=rgba(glow,.045*intensity);for(let i=0;i<12;i++){const y=(i*41.3+progress*25)%h;ctx.fillRect(0,y,w,(1+i%3)*intensity);}}
+    }
+    if(motion==='weaponCam'){
+      ctx.save();ctx.strokeStyle=rgba(glow,.75);ctx.lineWidth=5;ctx.lineCap='round';
+      const swing=smooth(clamp((progress-.30)/.33,0,1));ctx.translate(w*.48,h*1.05);ctx.rotate(-.55+1.15*swing);
+      ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(w*.20,-h*.67);ctx.stroke();ctx.strokeStyle='rgba(255,255,255,.45)';ctx.lineWidth=1.5;ctx.stroke();ctx.restore();
+    }
+    ctx.restore();
+    // A subtle movie frame / letterbox pattern.
+    ctx.fillStyle='rgba(5,7,12,.32)';ctx.fillRect(0,0,w,4);ctx.fillRect(0,h-4,w,4);
+  }
+  function initializeCanvases(){
+    if('IntersectionObserver'in window){sceneObserver=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting)visibleCanvas.add(entry.target);else visibleCanvas.delete(entry.target);}}, {rootMargin:'250px 0px'});els.grid.querySelectorAll('canvas').forEach(c=>sceneObserver.observe(c));}
+    else els.grid.querySelectorAll('canvas').forEach(c=>visibleCanvas.add(c));
+    // Initial frame must be visible even when animations are paused.
+    for(const canvas of els.grid.querySelectorAll('canvas')){const m=moves.find(x=>x.id===canvas.dataset.canvasId);if(m)drawScene(canvas,m.motion,m.tags[0],.32);}
+  }
+  function tick(now){
+    const hero=document.getElementById('hero-canvas');
+    const t=((now-rafStart)%clipDuration)/clipDuration;
+    if(document.visibilityState==='visible'){
+      if(!state.paused)drawScene(hero,'dollyIn','romance',t);
+      for(const canvas of visibleCanvas){if(!canvas.isConnected)continue;const p=canvas.closest('.preview');if(!p||p.dataset.paused==='true')continue;const m=moves.find(x=>x.id===canvas.dataset.canvasId);if(!m)continue;const phase=(t+((moves.indexOf(m)%5)*.058))%1;drawScene(canvas,m.motion,m.tags[0],phase);const bar=p.querySelector('[data-progress]');if(bar)bar.style.width=`${phase*100}%`;}
+    }
+    requestAnimationFrame(tick);
+  }
+  renderTabs();renderCards();renderGlobal();
+  drawScene(document.getElementById('hero-canvas'),'dollyIn','romance',.25);
+  requestAnimationFrame(tick);
+  // Keep canvas crisp after viewport changes, without disrupting filters.
+  let resizeTimeout;window.addEventListener('resize',()=>{clearTimeout(resizeTimeout);resizeTimeout=setTimeout(()=>{for(const canvas of els.grid.querySelectorAll('canvas')){const m=moves.find(x=>x.id===canvas.dataset.canvasId);if(m)drawScene(canvas,m.motion,m.tags[0],.3);}drawScene(document.getElementById('hero-canvas'),'dollyIn','romance',.3);},120);});
+})();
+</script>
+</body>
+</html>
